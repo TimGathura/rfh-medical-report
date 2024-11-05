@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <title>RFH Report</title>
+
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0mm 0mm;
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .border-x {
+            border: 2px solid yellowgreen;
+        }
+
+        .border-y {
+            border: 4px solid blue;
+        }
+
+        .border-z {
+            border: 2px solid fuchsia;
+        }
+
+        .border-top {
+            border-top: 3px solid #53544e;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+        .border-x {
+            @apply border-x;
+        }
+
+        .border-y {
+            @apply border-y;
+        }
+
+        .border-z {
+            @apply border-z;
+        }
+
+        .border-top {
+            @apply border-top;
+        }
+
+        .row {
+            display: flex;
+            align-items: start;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Overall wrapper section -->
+    <section class="" style="position: relative; height: 100%; color: #53544e;">
+        <!-- Page 1 -->
+        <div style="height: 100%;">
+            <!-- Main table; page 1 -->
+            <table style="width: 100%; height: 100%">
+                <tbody style="height: 100%;">
+                    <tr>
+                        <td style="position: relative;">
+                            <!--Header section -->
+                            <div style="margin: 30px 30px 0 30px;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <!-- Header section -->
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <table style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                        <td
+                                                            style="width: 56%; vertical-align: bottom; padding-left: 50px;">
+                                                            <img src=" data:image/png;base64,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"
+                                                            alt="rfh_logo">
+                                                        </td>
+                                                        <td>
+                                                            <table style="width: 100%; ">
+                                                                <tr>
+                                                                    <td style="width: fit-content;">
+                                                                        <div>
+                                                                            <ul
+                                                                                style="width: fit-content; font-size: small; list-style-type: none; margin: 0; padding: 0;">
+                                                                                <li
+                                                                                    style="font-size: medium; margin-bottom: 5px; font-weight: 500;">
+                                                                                    RFH Ruiru</li>
+                                                                                <li>ALONG EASTERN BYPASS AT KARUGURU
+                                                                                    STAGE</li>
+                                                                                <li>NAIROBI, KENYA</li>
+                                                                                <li>Tel: +254 123 456 789</li>
+                                                                                <li>Email: info@rfhhealthcare.co.ke</li>
+                                                                                <li>Website: www.rfhhealthcare.co.ke
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Patient details and invoice-->
+                            <div style="padding: 0 30px;">
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div style="padding: 20px 10px 0 20px;">
+                                                    <table class="border-top"
+                                                        style="width: 100%; padding: 20px 10px 0 10px;">
+                                                        <!-- Patient Details tables -->
+                                                        <tr>
+                                                            <td>
+                                                                <!-- Patient name -->
+                                                                <table style="width: 100%;">
+                                                                    <tr>
+                                                                        <!-- Details left -->
+                                                                        <td style="width: 56%; vertical-align: top;">
+                                                                            <table
+                                                                                style="table-layout: auto; width:100%; padding: 0; margin: 0; font-size:small;">
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Name:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>TIMOTHY GATHURA BORO</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Reg No:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>RFH-80601-24</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>OP Visit Date.</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>2024-10-16 12:33:00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>OP Visit No.</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>OPV-166898-8</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Account:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>BARKER & BARTON KENYA</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>A/c No:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>01-2345-67</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Insurance Co:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>JUBILEE INSURANCE</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Membership No:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>1234567</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Doctor:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>LENNOX YAA - GENERAL PRACTICE
+                                                                                        </p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 35%;">
+                                                                                        <p>Claim Number:</p>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <p>1234567 - WYX42WVGMY</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <!-- Details right -->
+                                                                        <td style="vertical-align: top;">
+                                                                            <table
+                                                                                style="table-layout: auto; width: 100%; padding: 0; margin: 0; font-size: small;">
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Invoice No:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>OP-95747-24-8</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Invoice Date:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>16/10/2024</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Consultation Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>1000.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Pharmacy Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>1100.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Lab Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>1200.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Radiology Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>0.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Referral Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>0.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td
+                                                                                        style="font-weight:bold; width: 50%;">
+                                                                                        <p>Service Amount:</p>
+                                                                                    </td>
+                                                                                    <td style="text-align: end;">
+                                                                                        <p>0.00</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Diagnosis -->
+                                                        <tr>
+                                                            <td
+                                                                style="text-align: center; font-weight: bold; font-size: small;">
+                                                                <p style="margin: 10px;">Diagnosis</p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- ICD Code -->
+                                                        <tr>
+                                                            <td>
+                                                                <table style="width: 56%; font-size: small;">
+                                                                    <tr>
+                                                                        <td style="font-weight:bold; width: 35%;">
+                                                                            <p>ICD Code</p>
+                                                                            <p>Impression</p>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <p>ICD Name</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="font-weight:bold; width: 35%;">
+                                                                            <p>Final Diagnosis</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 35%;">
+                                                                            <p>J20</p>
+                                                                            <p>J03</p>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <p>Acute bronchitis</p>
+                                                                            <p>Acute tonsillitis</p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Detailed Invoice row -->
+                                        <tr>
+                                            <td>
+                                                <table style="width: 100%; padding: 0 30px;">
+                                                    <tr>
+                                                        <td
+                                                            style="text-align: center; font-size: small; font-weight: bold;">
+                                                            <div style="margin: 10px 0;">
+                                                                DETAILED INVOICE
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Main invoice table -->
+                                                    <tr>
+                                                        <td>
+                                                            <table
+                                                                style="width: 100%;  font-size: small; font-weight: normal; border-collapse: collapse;">
+                                                                <!-- Invoice header row -->
+                                                                <tr>
+                                                                    <th
+                                                                        style="text-align: start; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>BILL DATE</p>
+                                                                    </th>
+                                                                    <th
+                                                                        style="text-align: start; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>REF No.</p>
+                                                                    </th>
+                                                                    <th
+                                                                        style="text-align: start; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>DESCRIPTION</p>
+                                                                    </th>
+                                                                    <th
+                                                                        style="text-align: start; text-align: center; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>QTY</p>
+                                                                    </th>
+                                                                    <th
+                                                                        style="text-align: start; text-align: end; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>RATE(KES)</p>
+                                                                    </th>
+                                                                    <th
+                                                                        style="text-align: end; border: 1px solid #53544e; border-right: 0; border-left: 0;">
+                                                                        <p>AMOUNT(KES)</p>
+                                                                    </th>
+                                                                </tr>
+                                                                <!-- First Complete row -->
+                                                                <!-- First row invoice-->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p style="font-weight: bold;">Consultation</p>
+                                                                        <p>2024-10-16</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>OPV-166989-8</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>GENERAL PRACTITIONER</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: center;">
+                                                                        <p>1.00</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>1,000.00</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>1,000.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Subtotal -->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td style="font-weight: bold; text-align: end;">
+                                                                        <p>Sub Total:</p>
+                                                                    </td>
+                                                                    <td style="text-align: end;">
+                                                                        <p>1,000.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Second Complete row -->
+                                                                <!-- First row invoice-->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p style="font-weight: bold;">Pharmacy</p>
+                                                                        <p>2024-10-16</p>
+                                                                        <p>2024-10-16</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>PRDIN00011</p>
+                                                                        <p>PRDIN02122</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>ZULU SP TABS</p>
+                                                                        <p>MONTIZED-L</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: center;">
+                                                                        <p>10</p>
+                                                                        <p>10</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>59.00</p>
+                                                                        <p>51.00</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>590.00</p>
+                                                                        <p>510.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Subtotal 2-->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td style="font-weight: bold; text-align: end;">
+                                                                        <p>Sub Total:</p>
+                                                                    </td>
+                                                                    <td style="text-align: end;">
+                                                                        <p>1,100.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Third Complete row -->
+                                                                <!-- First row invoice-->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p style="font-weight: bold;">Laboratory</p>
+                                                                        <p>2024-10-16</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>L000448</p>
+                                                                    </td>
+                                                                    <td style="vertical-align: bottom;">
+                                                                        <p>HAEMOGRAM</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: center;">
+                                                                        <p>1.00</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>1,200.00</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="vertical-align: bottom; text-align: end;">
+                                                                        <p>1,200.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Subtotal -->
+                                                                <tr>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p></p>
+                                                                    </td>
+                                                                    <td style="font-weight: bold; text-align: end;">
+                                                                        <p>Sub Total:</p>
+                                                                    </td>
+                                                                    <td style="text-align: end;">
+                                                                        <p>1,200.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Grand total and the rest -->
+                                                    <tr>
+                                                        <td>
+                                                            <table style="width: 100%; font-size: small;">
+                                                                <tr>
+                                                                    <td>
+                                                                        <p style="font-weight: bold;">KES</p>
+                                                                        <p>Three Thousand Three Hundred - Zero Cents
+                                                                            Only</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td
+                                                                        style="text-align: end; font-weight: bold; font-size: small;">
+                                                                        <p>Total Amount(KES):</p>
+                                                                        <p>Total Copay(KES):</p>
+                                                                        <p>Amount Payable(KES):</p>
+                                                                    </td>
+                                                                    <td
+                                                                        style="text-align: end; width: 115px; font-size: small;">
+                                                                        <p>3,300.00</p>
+                                                                        <p>0.00</p>
+                                                                        <p>3,300.00</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="display: flex; gap: 55px;">
+                                                                            <p>137306</p>
+                                                                            <div
+                                                                                style="max-height: 40px; font-weight: bold;">
+                                                                                {QR_CODE}</div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="display: flex; gap: 30px;">
+                                                                            <p style="font-weight: bold;">Served By:</p>
+                                                                            <p>EVERLYN AWUOR</p>
+                                                                            <div
+                                                                                style="display: flex; gap: 5px; align-items: end;">
+                                                                                <p style="font-weight: bold;">Patient's
+                                                                                    Signature:</p>
+                                                                                <div
+                                                                                    style="border-bottom: 1px dotted #53544e; width: 80px;">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div style="display: flex; gap: 10px;">
+                                                                            <p>16/10/2024</p>
+                                                                            <p>3:44</p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </section>
+
+</body>
+
+</html>
